@@ -1,0 +1,125 @@
+## To create virtual environment
+install Django, use the one compatible with your Python (https://docs.djangoproject.com/en/5.1/faq/install/). <pip install Django>
+in the terminal, type <py -m venv venv> to add venv folder ( this is the virtual environment folder)
+Activate venv by typing <venv\Scripts\Activate>
+
+## Why create a virtual environment
+- You may have multiple Python versios on your computer
+- You may have projects that rwquire different versions of same external package
+- Virtual environments create a "workspace" environment for a specific projects
+ - All installed apps are in one place, without conflicts
+ - The "python" and "pip" commands point to the same place
+ -  Keep your enviornment clean.
+
+ ## Installing the requirements in the requirement.txt folder
+ - use <pip install -r requirements.txt> # this will install all the requirement in the files
+
+ ## Create a new folder
+ - in the terminal <django-admin startproject Taofeek_test> # this will create a new file inside the intro-to-django folder
+ - navigate into Taofeek.test folder <cd Taofeek_test>
+ - Run ther vm server using <python manage.py runserver>
+  - This will create a new file within Taofeek.test called db.sqlite3
+  - You will also get some messages on the command screen
+   -You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+   - Run 'python manage.py migrate' to apply them.
+   - March 11, 2025 - 09:58:19
+   - Django version 4.2.20, using settings 'Taofeek_test.settings'
+   - Starting development server at http://127.0.0.1:8000/
+   - Quit the server with CTRL-BREAK.
+  - go to the port above and it should take you to django
+  - Next go to the admin of the local host: http://127.0.0.1:8000/admin/
+  
+  ## Initialize the development database
+  -  <python manage.py migrate>
+   - This will Initialize a SQLite database (db.sqlite3) with the tables specified in the default project:
+    - Autorization table (user, permissions, groups)
+    - django_migratations
+    django_admins_log
+    django_sessions
+    django_content_type
+ - To view the database, you can use website: https://inloop.github.io/sqlite-viewer/
+ - you can also download VS Code extension
+  - plugin:SQlite
+
+  ## Create super username for admin login
+  - <python manage.py createsuperuser>
+  -Suppy the following
+   - username: Admin
+   - email address: Sanyaolutaofeek@yahoo.com
+   - password (u can bypass the pasword requirements):
+
+## login to django administration
+-  go to http://127.0.0.1:8000/admin/login/?next=/admin/ and login
+
+if you type python manage.py without any extension, it gives you list of available commands
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[auth]
+    changepassword
+    createsuperuser
+
+[contenttypes]
+    remove_stale_contenttypes
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations
+    migrate
+    optimizemigration
+    sendtestemail
+    shell
+    showmigrations
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+
+[sessions]
+    clearsessions
+
+[staticfiles]
+    collectstatic
+    findstatic
+    runserver
+
+## Setting.py
+-  this is where your seeting configuration is completed. 
+- you need to set debug mode to off when in production
+- you need to point to another DB like postgres in production instead of SQLite
+
+
+## Creating a Django app (an example)
+- Steps to create a Django app
+	1. Create a new app using startapp
+	2. Add it to settings
+	3. Create a URL: add urls.py file to visit folder
+	4. Link it to a view
+	5. Return a template
+	6. Make it dynamic with context
+	7. Use data from a model
+    8. Add some static files
+
+You can do everything through manage.py and it will link to every other folders
+- first navigate to Taofeek_test if the venv is already closed: cd Taofeek_text
+- start the app using <python manage.py startapp visit> This will create a new folder called visit
+-  in settings.py under Taofeek_test add the string path to new folder (visit) to setting under installed_app
+ - add <visit.apps.VisitConfig> to settings
+- Django use Install_apps as a list of places to look for models, management commands, tests, and other utilities.
+- Create url by adding a new file to visit called urls.py
+ - Add url pattern
+- After editing the url in visit, you need to now connect it to the mail folder (Taofeek_test) urls.py

@@ -1,0 +1,28 @@
+section.main {
+  min-height: calc(100vh - 280px);
+}
+
+.is-unclickable {
+  cursor: auto !important;
+  pointer-events: none;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.question {
+  height: unset;
+}
+
+.details {
+  width: fit-content;
+}
+
+.bottom-row {
+  width: 100%;
+}
+
+.navbar-item img {
+max-height: unset
+}

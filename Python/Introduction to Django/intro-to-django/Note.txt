@@ -1,3 +1,4 @@
+# By Taofeek
 ## To create virtual environment
 install Django, use the one compatible with your Python (https://docs.djangoproject.com/en/5.1/faq/install/). <pip install Django>
 in the terminal, type <py -m venv venv> to add venv folder ( this is the virtual environment folder)
@@ -123,3 +124,23 @@ You can do everything through manage.py and it will link to every other folders
 - Create url by adding a new file to visit called urls.py
  - Add url pattern
 - After editing the url in visit, you need to now connect it to the mail folder (Taofeek_test) urls.py
+
+## Migrating to Database
+- When you make a change in the model.py file, you need to run python manage.py makemigrations.
+ - That will create a new file 0001_initial.py in the migration folder
+ - When you confirm the file now exist, you can now migrate to database by typing <python manage.py migrate
+ - The DB is now ready for any visit file you want to put in it.
+  - python manage.py shell
+  - This will open a python interactive section for DB while still having access to Django
+  - The python, run the following
+   - from visits.models import Visits
+   - v = Viists() then enter
+   -check databasw using v.count then enter (that should give you zero as nothing is saved at this time)
+   - you can then save using v.save() then enter
+   - using Visists.objects.all() you can query the database.
+   - exit to get back to the terminal
+
+   ## Editing the model using Admin
+   1. register the Visista moel in admins.py
+    - from sample file, copy admin.py and past in Visit admin.py
+   

@@ -1,13 +1,17 @@
 # Create your views here.
 from random import randint
 from django.shortcuts import render
-from .models import Visits
+from .models import Visit
 
-def index(request):
-    v = Visits.objects.first()
-    v.count += 1
+def index(request, page=""):
+    v = Visit(page=page)
+    if request.user.is_authenticated:
+        v.username = request.user.username
     v.save()
+    visitors = Visit.objects.filter(page=page)
     context = {
-        "num_visits": v.count
+        "page": page,
+        "visitors":visitors,
+        "num_visits": visitors.count()
     }
     return render(request,"index.html", context=context)

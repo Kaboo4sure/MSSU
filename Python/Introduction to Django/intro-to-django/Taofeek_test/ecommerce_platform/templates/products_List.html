@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+  <h2>Product Listings</h2>
+
+  <a href="{% url 'view-cart' %}">🛒 View Cart</a>
+
+  {% for product in products %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Price: ${{ product.price }}</p>
+
+      <form action="{% url 'add-to-cart' product.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
+  {% endfor %}
+{% endblock %}

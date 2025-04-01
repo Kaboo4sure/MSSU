@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Orders for Your Products</h2>
+
+{% if order_items %}
+  <ul>
+    {% for item in order_items %}
+      <li>
+        <strong>{{ item.product.name }}</strong> — 
+        Ordered by: {{ item.order.buyer.username }} —
+        Quantity: {{ item.quantity }} — 
+        Price: ${{ item.price }} —
+        Date: {{ item.order.order_date|date:"M d, Y H:i" }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No orders for your products yet.</p>
+{% endif %}
+
+<a href="{% url 'product-list' %}">← Back to Products</a>
+{% endblock %}

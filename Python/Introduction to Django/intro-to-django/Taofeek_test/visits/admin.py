@@ -1,9 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Visits
+from .models import Visit
 
 
-@admin.register(Visits)
+@admin.register(Visit)
 class VisitsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["__str__","page", "username", "timestamp"]
+    list_filter = ["page", "username", "timestamp"]
+    search_fields = ["page", "username"]
+    readonly_fields = ["timestamp"]

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}!</p>
+
+    {% if user.role == 'seller' %}
+      <p><a href="/dashboard/">Seller Dashboard</a></p>
+    {% elif user.is_superuser %}
+      <p><a href="/admin/">Admin Panel</a></p>
+    {% else %}
+      <p><a href="/products/">Browse Products</a></p>
+      <p><a href="{% url 'my-orders' %}">🧾 My Orders</a></p>  {# ✅ Moved inside here #}
+    {% endif %}
+
+    <p><a href="/accounts/logout/">Logout</a></p>
+
+  {% else %}
+    <p><a href="/accounts/login/">Login</a> | <a href="/accounts/register/">Register</a></p>
+    <p><a href="/products/">Browse Products as Guest</a></p>
+  {% endif %}
+{% endblock %}

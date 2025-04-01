@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Your Products</h2>
+  <a href="{% url 'add-product' %}">Add New Product</a>
+  <ul>
+    {% for product in products %}
+      <li>
+        <strong>{{ product.name }}</strong> - ${{ product.price }}
+        <a href="{% url 'edit-product' product.pk %}">Edit</a>
+        <a href="{% url 'delete-product' product.pk %}">Delete</a>
+      </li>
+    {% empty %}
+      <li>You have no products listed yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

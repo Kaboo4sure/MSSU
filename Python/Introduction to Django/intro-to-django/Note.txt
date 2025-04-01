@@ -144,3 +144,49 @@ You can do everything through manage.py and it will link to every other folders
    1. register the Visista moel in admins.py
     - from sample file, copy admin.py and past in Visit admin.py
    
+## Settings for personal 
+- Setting provides configuration for your Djago project
+- Default location is settings.py
+ -  Python file, python syntax
+ - setting are constants
+ - Use all upercases
+ - Reload server if any settings change
+- Specify the location of your settings file
+ - in manage.py
+  - os..environ.setdefault('DJANGO_SETTING_MODULE', 'your_folder_name.settings')
+
+### Must-Know settings in Django
+1. debug: show detailed error page vs 404.html or 500.html
+ - never set it to True in production
+2. Installed_Apps
+ - all Django. 3rd party an local apps used are set here.
+2. Databases
+ - Can configure multiple Databases
+ - SHould be different from local, prodution, staging.
+ Note: Django has a slight preference for postgres
+3. Base_Dir
+ - set to project root (where manage.py is located)
+4. App_Dir
+ - set to where apps are located
+5. Templates
+ - DIRS -Where to look for Templates
+ -APP_DIRS - it True, look for a "templates" folder in each app
+6. STaticFiles_DIRS
+ - Where to look for static files
+7. Use_TZ
+ - True is dates/Times should be timezone-aware bu default
+ - Should set to True
+8. TIME_ZONE - Set to your time 
+9. USE_I8N - Aneble text translation (Set to False if not supported)
+ - USE_L10N - Format data based on locale
+
+## Django ORM 
+- Object-Relational Mapping
+- Manage your data and database with Python instead of SQL 
+- Lazy evaluation of queries (database only gets accessed when data is requested, not when forming queries)
+- Define models with fields and relationships
+-Create a migration file- $python manage.py 
+- Migrate the database: $ python manage.py migrate
+
+## Updating the Visit model by renaming the models.visits to visit
+

@@ -2,20 +2,27 @@
 {% block title %}Products{% endblock %}
 
 {% block content %}
-  <h2>Product Listings</h2>
+  <h2>🛍️ Product Listings</h2>
 
-  <a href="{% url 'view-cart' %}">🛒 View Cart</a>
+  <a href="{% url 'view-cart' %}" style="float: right; margin-bottom: 10px;">🛒 View Cart</a>
+  <div style="clear: both;"></div>
 
   {% for product in products %}
-    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <p>Price: ${{ product.price }}</p>
+    <div style="border: 1px solid #ccc; padding: 15px; margin: 20px 0; display: flex; gap: 20px; align-items: center;">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 150px; height: auto; object-fit: cover; border-radius: 8px;">
+      {% endif %}
 
-      <form action="{% url 'add-to-cart' product.id %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Add to Cart</button>
-      </form>
+      <div>
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+
+        <form action="{% url 'add-to-cart' product.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Add to Cart 🛒</button>
+        </form>
+      </div>
     </div>
   {% endfor %}
 {% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Your Shopping Cart</h2>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if cart_items %}
+  <ul>
+    {% for item in cart_items %}
+      <li>
+        <strong>{{ item.product.name }}</strong> — 
+        Quantity: {{ item.quantity }} — 
+        Subtotal: ${{ item.subtotal }}
+
+        <form action="{% url 'remove-from-cart' item.product.id %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Remove</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>Total: ${{ total }}</h3>
+
+  <form action="{% url 'checkout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Proceed to Checkout</button>
+  </form>
+
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+
+<a href="{% url 'product-list' %}">Continue Shopping</a>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}E-Commerce{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+      <nav style="background: #333; color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <a href="{% url 'home' %}" style="color: white; text-decoration: none; font-weight: bold;">🛒 E-Commerce</a>
+        </div>
+        <div>
+          {% if user.is_authenticated %}
+            <span style="margin-right: 10px;">Hi, {{ user.username }}!</span>
+  
+            {% if user.role == 'seller' %}
+              <a href="/dashboard/" style="margin-right: 10px; color: white;">Dashboard</a>
+              <a href="{% url 'seller-products' %}" style="margin-right: 10px; color: white;">My Products</a>
+              <a href="{% url 'seller-orders' %}" style="margin-right: 10px; color: white;">Orders</a>
+            {% elif user.role == 'buyer' %}
+              <a href="{% url 'product-list' %}" style="margin-right: 10px; color: white;">Shop</a>
+              <a href="{% url 'view-cart' %}" style="margin-right: 10px; color: white;">🛒 Cart</a>
+              <a href="{% url 'my-orders' %}" style="margin-right: 10px; color: white;">🧾 My Orders</a>
+            {% endif %}
+  
+            {% if user.is_superuser %}
+              <a href="/admin/" style="margin-right: 10px; color: white;">Admin</a>
+            {% endif %}
+  
+            <a href="{% url 'logout' %}" style="color: white;">Logout</a>
+          {% else %}
+            <a href="{% url 'product-list' %}" style="margin-right: 10px; color: white;">Browse</a>
+            <a href="{% url 'login' %}" style="margin-right: 10px; color: white;">Login</a>
+            <a href="{% url 'register' %}" style="color: white;">Register</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+  
+    {% if messages %}
+      <div style="background-color: #e0ffe0; padding: 10px; margin: 10px;">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  
+    <main style="padding: 20px;">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+  

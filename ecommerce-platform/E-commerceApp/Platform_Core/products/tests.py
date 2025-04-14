@@ -12,6 +12,7 @@ class ProductTests(TestCase):
         response = self.client.post('/products/add/', {
             'name': 'Test Product',
             'price': 50.00,
+            'stock': 10,
             'description': 'A product for test'
         })
         self.assertEqual(response.status_code, 302)  # redirect on success

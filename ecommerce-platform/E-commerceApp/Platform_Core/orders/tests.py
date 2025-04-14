@@ -3,7 +3,7 @@ from products.models import Product
 
 class CartTests(TestCase):
     def setUp(self):
-        self.product = Product.objects.create(name='Shoes', price=75.00)
+        self.product = Product.objects.create(name='Shoes', price=75.00, stock=10)
 
     def test_add_to_cart(self):
         session = self.client.session

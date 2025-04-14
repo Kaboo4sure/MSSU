@@ -10,5 +10,5 @@ class UserAuthTests(TestCase):
 
     def test_login(self):
         self.client.post('/register/', {'username': 'testuser', 'password': 'pass123'})
-        response = self.client.post('/login/', {'username': 'testuser', 'password': 'pass123'})
+        response = self.client.post('/users/login/', ...)
         self.assertEqual(response.status_code, 200)

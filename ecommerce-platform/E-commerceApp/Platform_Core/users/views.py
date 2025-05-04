@@ -5,6 +5,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm,  ProfileUpdateForm, CustomPasswordChangeForm
+from django.contrib.auth import logout
 
 def register(request):
     if request.method == 'POST':
@@ -36,4 +37,9 @@ def profile_view(request):
     return render(request, 'users/profile.html', {
         'profile_form': profile_form,
         'password_form': password_form
+        
+def logout_view(request):
+    logout(request)
+    return redirect('login')  # Or another named URL like 'user-login'
+    
     })

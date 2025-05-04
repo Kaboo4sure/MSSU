@@ -17,7 +17,6 @@
             <span style="margin-right: 10px;">Hi, {{ user.username }}!</span>
             <a href="{% url 'profile' %}" style="margin-right: 10px; color: white;">👤 Profile</a>
 
-  
             {% if user.role == 'seller' %}
               <a href="/dashboard/" style="margin-right: 10px; color: white;">Dashboard</a>
               <a href="{% url 'seller-products' %}" style="margin-right: 10px; color: white;">My Products</a>
@@ -27,12 +26,15 @@
               <a href="{% url 'view-cart' %}" style="margin-right: 10px; color: white;">🛒 Cart</a>
               <a href="{% url 'my-orders' %}" style="margin-right: 10px; color: white;">🧾 My Orders</a>
             {% endif %}
-  
+
             {% if user.is_superuser %}
               <a href="/admin/" style="margin-right: 10px; color: white;">Admin</a>
             {% endif %}
-  
-            <a href="{% url 'logout' %}" style="color: white;">Logout</a>
+
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">Logout</button>
+            </form>
           {% else %}
             <a href="{% url 'product-list' %}" style="margin-right: 10px; color: white;">Browse</a>
             <a href="{% url 'login' %}" style="margin-right: 10px; color: white;">Login</a>
@@ -41,7 +43,7 @@
         </div>
       </nav>
     </header>
-  
+
     {% if messages %}
       <div style="background-color: #e0ffe0; padding: 10px; margin: 10px;">
         {% for message in messages %}
@@ -49,9 +51,9 @@
         {% endfor %}
       </div>
     {% endif %}
-  
+
     <main style="padding: 20px;">
       {% block content %}{% endblock %}
     </main>
-  </body>
-  
+</body>
+</html>

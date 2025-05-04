@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-from .forms import CustomUserCreationForm,  ProfileUpdateForm, CustomPasswordChangeForm
-from django.contrib.auth import logout
+from .forms import CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
 
 def register(request):
     if request.method == 'POST':
@@ -29,7 +27,7 @@ def profile_view(request):
             password_form.save()
             update_session_auth_hash(request, password_form.user)  # keep user logged in
             messages.success(request, 'Your profile and password were updated successfully.')
-            return redirect('profile')  # or any success page
+            return redirect('profile')
     else:
         profile_form = ProfileUpdateForm(instance=request.user)
         password_form = CustomPasswordChangeForm(user=request.user)
@@ -37,9 +35,8 @@ def profile_view(request):
     return render(request, 'users/profile.html', {
         'profile_form': profile_form,
         'password_form': password_form
-        
+    })
+
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Or another named URL like 'user-login'
-    
-    })
+    return redirect('login')

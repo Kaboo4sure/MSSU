@@ -15,6 +15,8 @@
         <div>
           {% if user.is_authenticated %}
             <span style="margin-right: 10px;">Hi, {{ user.username }}!</span>
+            <a href="{% url 'profile' %}" style="margin-right: 10px; color: white;">👤 Profile</a>
+
   
             {% if user.role == 'seller' %}
               <a href="/dashboard/" style="margin-right: 10px; color: white;">Dashboard</a>

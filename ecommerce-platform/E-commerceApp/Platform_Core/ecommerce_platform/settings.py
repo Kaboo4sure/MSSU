@@ -133,6 +133,7 @@ SITE_ID = 1
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+LOGIN_REDIRECT_URL = '/'  # or any named URL like '/dashboard/', '/products/', etc.
 
 
 

@@ -17,8 +17,8 @@ class ProductTests(TestCase):
     def test_add_product(self):
         image = SimpleUploadedFile(
             name='test_image.jpg',
-            content=b'file_content',  # just dummy bytes
-            content_type='image/jpeg'
+            content=b'\x47\x49\x46\x38\x39\x61',  # fake GIF header bytes
+            content_type='image/gif'
         )
 
         response = self.client.post(reverse('add-product'), {

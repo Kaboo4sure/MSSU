@@ -17,7 +17,7 @@ class ProductTests(TestCase):
     def test_add_product(self):
         image = SimpleUploadedFile(
             name='test_image.jpg',
-            content=b'fake-image-content',
+            content=b'file_content',  # just dummy bytes
             content_type='image/jpeg'
         )
 

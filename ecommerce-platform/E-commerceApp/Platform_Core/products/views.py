@@ -13,7 +13,7 @@ def home(request):
 
 def product_list(request):
     products = Product.objects.all()
-    return render(request, 'products_list.html', {'products': products})
+    return render(request, 'products/products_list.html', {'products': products})
 
 @login_required
 def seller_products(request):

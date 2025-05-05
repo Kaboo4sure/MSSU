@@ -29,6 +29,9 @@ class ProductTests(TestCase):
             'image': image
         })
 
+        if response.status_code != 302:
+            print("Form Errors:", response.context['form'].errors)  # 👈 Debug line
+
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Product.objects.filter(name='Test Product').exists())
 
